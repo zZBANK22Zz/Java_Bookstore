@@ -1,0 +1,385 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CustomerBookDisplayFrame",
+            "request": "launch",
+            "mainClass": "BookStore.CustomerBookDisplayFrame",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "BookStoreApp",
+            "request": "launch",
+            "mainClass": "com.google.gson/BookStore.BookStoreApp",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "BookStoreApp",
+            "request": "launch",
+            "mainClass": "BookStore.BookStoreApp",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "DivisionExample",
+            "request": "launch",
+            "mainClass": "Exercise.DivisionExample",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Animal",
+            "request": "launch",
+            "mainClass": "Exercise.Pretest.Animal",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Drink",
+            "request": "launch",
+            "mainClass": "Exercise.WormUp.Drink",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "BankAccoutDemo",
+            "request": "launch",
+            "mainClass": "Exercise.bankAcc.BankAccoutDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "exercise1",
+            "request": "launch",
+            "mainClass": "Exercise.exercise1",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "honda",
+            "request": "launch",
+            "mainClass": "Exercise.pretest2.honda",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "StudentDemo",
+            "request": "launch",
+            "mainClass": "Exercise.student.StudentDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "FirstGUI",
+            "request": "launch",
+            "mainClass": "GUI.FirstGUI",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "FrameGUI",
+            "request": "launch",
+            "mainClass": "GUI.FrameGUI",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "LayoutGUI",
+            "request": "launch",
+            "mainClass": "GUI.LayoutGUI",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "TemperatureConverter",
+            "request": "launch",
+            "mainClass": "GUI.TemperatureConverter",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "EmployeeDemo",
+            "request": "launch",
+            "mainClass": "Homework.EmployeeDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Lab1",
+            "request": "launch",
+            "mainClass": "Homework.Lab1",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Grade",
+            "request": "launch",
+            "mainClass": "Homework.Lab3.Grade",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Interest",
+            "request": "launch",
+            "mainClass": "Homework.Lab3.Interest",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Random",
+            "request": "launch",
+            "mainClass": "Homework.Lab3.Random",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "bodyMass",
+            "request": "launch",
+            "mainClass": "Homework.Lab3.bodyMass",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "fahrenheit",
+            "request": "launch",
+            "mainClass": "Homework.Lab3.fahrenheit",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "notZero",
+            "request": "launch",
+            "mainClass": "Homework.Lab3.notZero",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ElectionDemo",
+            "request": "launch",
+            "mainClass": "Homework.Lab4.ElectionDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "lotteryGame",
+            "request": "launch",
+            "mainClass": "Homework.Lab4.lotteryGame",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "studentManagement",
+            "request": "launch",
+            "mainClass": "Homework.Lab5.GPA.studentManagement",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "subjectManagement",
+            "request": "launch",
+            "mainClass": "Homework.Lab5.subjectManagement",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "FoodsDemo",
+            "request": "launch",
+            "mainClass": "Lab10.FoodsDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "PayDemo",
+            "request": "launch",
+            "mainClass": "Lab11.PayDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ShapePolyDemo",
+            "request": "launch",
+            "mainClass": "Lab11.ShapePolyDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "OverloadDemo",
+            "request": "launch",
+            "mainClass": "Lab7.OverloadDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ShapeDemo1",
+            "request": "launch",
+            "mainClass": "Lab7.ShapeDemo1",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "HRsystem",
+            "request": "launch",
+            "mainClass": "Lab8.HRsystem",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "AddofStudent",
+            "request": "launch",
+            "mainClass": "Lab9.AddofStudent",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "LoginPage",
+            "request": "launch",
+            "mainClass": "Registetion.LoginPage",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "MainPage",
+            "request": "launch",
+            "mainClass": "Registetion.MainPage",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ExceptionDemo",
+            "request": "launch",
+            "mainClass": "Study.ExceptionDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "FileManagement",
+            "request": "launch",
+            "mainClass": "Study.FileManagement",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Practice",
+            "request": "launch",
+            "mainClass": "Study.Practice",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Pratice",
+            "request": "launch",
+            "mainClass": "Study.Pratice",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ThrownDemo",
+            "request": "launch",
+            "mainClass": "Study.ThrownDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "practice2",
+            "request": "launch",
+            "mainClass": "Study.practice2",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "AppendStudentList",
+            "request": "launch",
+            "mainClass": "fileio.AppendStudentList",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "BinaryInputDemo",
+            "request": "launch",
+            "mainClass": "fileio.BinaryInputDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "BinaryObjectOutputDemo",
+            "request": "launch",
+            "mainClass": "fileio.BinaryObjectOutputDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "BinaryOuputDemo",
+            "request": "launch",
+            "mainClass": "fileio.BinaryOuputDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ManageStudentModule",
+            "request": "launch",
+            "mainClass": "fileio.ManageStudentModule",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "ObjectAppendOutputDemo",
+            "request": "launch",
+            "mainClass": "fileio.ObjectAppendOutputDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "TextFileAppendDemo",
+            "request": "launch",
+            "mainClass": "fileio.TextFileAppendDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "TextFileDemo",
+            "request": "launch",
+            "mainClass": "fileio.TextFileDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "TextFileInputDemo",
+            "request": "launch",
+            "mainClass": "fileio.TextFileInputDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "TextFileOutputDemo",
+            "request": "launch",
+            "mainClass": "fileio.TextFileOutputDemo",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "project.LoginAndRegisterForm.Main",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Stopwatch",
+            "request": "launch",
+            "mainClass": "project.TImer.Stopwatch",
+            "projectName": "OOP_16f1069c"
+        }
+    ]
+}

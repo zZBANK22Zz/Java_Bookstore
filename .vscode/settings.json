@@ -1,0 +1,10 @@
+{
+    "git.ignoreLimitWarning": true,
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/bank/Downloads/gson-gson-parent-2.10.1 2/**/*.jar",
+        "apache-maven-3.9.6/**/*.jar",
+        "/Users/bank/Downloads/jdk-22.jdk/**/*.jar"
+    ]
+}
