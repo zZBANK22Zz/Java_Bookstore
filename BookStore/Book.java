@@ -1,6 +1,8 @@
 package BookStore;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable{
     private String title;
     private String author;
     private double price;
@@ -35,4 +37,5 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
+
 }

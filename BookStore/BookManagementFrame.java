@@ -4,12 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.util.List;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BookManagementFrame extends JFrame {
     private JPanel bookPanel; // Panel to hold book cards
     private JButton addButton;
+    private List<Book> books; 
 
     
     public BookManagementFrame() {
@@ -20,6 +25,8 @@ public class BookManagementFrame extends JFrame {
         // Initialize components
         bookPanel = new JPanel(new GridLayout(0, 1)); // Use grid layout for book cards
         addButton = new JButton("Add Book");
+
+        books = new ArrayList<>();
 
         // Set layout
         setLayout(new BorderLayout());
@@ -43,7 +50,7 @@ public class BookManagementFrame extends JFrame {
         });
     }
 
-    private void showAddBookDialog() {
+    void showAddBookDialog() {
         // Create components for the add book dialog
         JTextField titleField = new JTextField(20);
         JTextField authorField = new JTextField(20);
@@ -122,6 +129,11 @@ public class BookManagementFrame extends JFrame {
             // Refresh the layout to display the new book card
             revalidate();
             repaint();
+
+            books.add(new Book(title, author, Double.parseDouble(price)));
+            // updateCustomerBookDisplay();
+
+            writeBookToFile(new Book(title, author, Double.parseDouble(price)));
         }
     }
 
@@ -157,24 +169,14 @@ public class BookManagementFrame extends JFrame {
         }
     }
 
-    // private void reloadBooks() {
-    //     // Clear existing book panels
-    //     bookPanel.removeAll();
+    private void writeBookToFile(Book book) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt", true))) {
+            // Append book information to the file
+            writer.write(book.getTitle() + "," + book.getAuthor() + "," + book.getPrice());
+            writer.newLine(); // Add a new line for the next book
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
-    //     // Load books from the book management service
-    //     List<Book> books = BookManagementService.getAllBooks();
-
-    //     // Display books in the book panel
-    //     for (Book book : books) {
-    //         JPanel bookCardPanel = new JPanel(new BorderLayout());
-    //         BookCard bookCard = new BookCard(book.getTitle(), book.getAuthor(), book.getPrice());
-    //         bookCardPanel.add(bookCard, BorderLayout.CENTER);
-    //         bookPanel.add(bookCardPanel);
-    //     }
-
-    //     // Refresh the layout to display the book cards
-    //     revalidate();
-    //     repaint();
-    // }
 }
