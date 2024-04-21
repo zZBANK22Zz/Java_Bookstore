@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ClassX",
+            "request": "launch",
+            "mainClass": "Exercise.ClassX",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Labtop",
+            "request": "launch",
+            "mainClass": "Exercise.Labtop",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Deer",
+            "request": "launch",
+            "mainClass": "Exercise.Deer",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Whale",
+            "request": "launch",
+            "mainClass": "Exercise.Whale",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
+            "name": "Cougar",
+            "request": "launch",
+            "mainClass": "Exercise.Cougar",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
             "name": "CustomerBookDisplayFrame",
             "request": "launch",
             "mainClass": "BookStore.CustomerBookDisplayFrame",

@@ -4,19 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class BookManagementFrame extends JFrame {
     private JPanel bookPanel; // Panel to hold book cards
     private JButton addButton;
     private List<Book> books; 
 
-    
     public BookManagementFrame() {
         setTitle("Book Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +48,86 @@ public class BookManagementFrame extends JFrame {
                 showAddBookDialog();
             }
         });
+
+        // Load existing books from file
+        loadExistingBooks();
+    }
+
+    private void loadExistingBooks() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("books.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Split the line by comma to extract book details
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String title = parts[0];
+                    String author = parts[1];
+                    double price = Double.parseDouble(parts[2]);
+                    // Create a new book object and add it to the list
+                    books.add(new Book(title, author, price));
+                    // Create a book card panel for the existing book
+                    JPanel bookCardPanel = createBookCardPanel(title, author, price);
+                    bookPanel.add(bookCardPanel);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JPanel createBookCardPanel(String title, String author, double price) {
+        // Create a new panel for the book card
+        JPanel bookCardPanel = new JPanel(new BorderLayout());
+
+        // Create a new book card with the entered details
+        BookCard bookCard = new BookCard(title, author, price);
+
+        // Create panel for buttons
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton editButton = new JButton("Edit");
+        JButton deleteButton = new JButton("Delete");
+
+        // Add action listeners for edit and delete buttons
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Pass the bookCard to the edit method
+                showEditBookDialog(bookCard);
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int result = JOptionPane.showConfirmDialog(
+                    BookManagementFrame.this,
+                    "Are you sure you want to delete this book?",
+                    "Delete Confirmation",
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if (result == JOptionPane.YES_OPTION) {
+                    // Remove the bookCardPanel from bookPanel
+                    bookPanel.remove(bookCardPanel);
+                    bookPanel.revalidate();
+                    bookPanel.repaint();
+                    // Remove the book from the list
+                    books.removeIf(b -> b.getTitle().equals(title) && b.getAuthor().equals(author) && b.getPrice() == price);
+                    // Update the books.txt file
+                    updateBooksFile();
+                }
+            }
+        });
+
+        // Add buttons to the button panel
+        buttonPanel.add(editButton);
+        buttonPanel.add(deleteButton);
+
+        // Add book card and button panel to the book card panel
+        bookCardPanel.add(bookCard, BorderLayout.CENTER);
+        bookCardPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        return bookCardPanel;
     }
 
     void showAddBookDialog() {
@@ -73,55 +153,12 @@ public class BookManagementFrame extends JFrame {
             String author = authorField.getText();
             String price = priceField.getText();
 
+            // Create a new book object and add it to the list
+            Book newBook = new Book(title, author, Double.parseDouble(price));
+            books.add(newBook);
 
-            // Create a new panel for the book card
-            JPanel bookCardPanel = new JPanel(new BorderLayout());
-
-            // Create a new book card with the entered details
-            BookCard bookCard = new BookCard(title, author, Double.parseDouble(price));
-
-            // Create panel for buttons
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            JButton editButton = new JButton("Edit");
-            JButton deleteButton = new JButton("Delete");
-
-            // reloadBooks();
-            
-            // Add action listeners for edit and delete buttons
-            editButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Pass the bookCard to the edit method
-                    showEditBookDialog(bookCard);
-                }
-            });
-
-            deleteButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int result = JOptionPane.showConfirmDialog(
-                        BookManagementFrame.this,
-                        "Are you sure you want to delete this book?",
-                        "Delete Confirmation",
-                        JOptionPane.YES_NO_OPTION
-                    );
-
-                    if (result == JOptionPane.YES_OPTION) {
-                        // Remove the bookCardPanel from bookPanel
-                        bookPanel.remove(bookCardPanel);
-                        bookPanel.revalidate();
-                        bookPanel.repaint();
-                    }
-                }
-            });
-
-            // Add buttons to the button panel
-            buttonPanel.add(editButton);
-            buttonPanel.add(deleteButton);
-
-            // Add book card and button panel to the book card panel
-            bookCardPanel.add(bookCard, BorderLayout.CENTER);
-            bookCardPanel.add(buttonPanel, BorderLayout.SOUTH);
+            // Create a book card panel for the new book
+            JPanel bookCardPanel = createBookCardPanel(title, author, Double.parseDouble(price));
 
             // Add the book card panel to the book panel
             bookPanel.add(bookCardPanel);
@@ -130,10 +167,8 @@ public class BookManagementFrame extends JFrame {
             revalidate();
             repaint();
 
-            books.add(new Book(title, author, Double.parseDouble(price)));
-            // updateCustomerBookDisplay();
-
-            writeBookToFile(new Book(title, author, Double.parseDouble(price)));
+            // Write the new book to the books.txt file
+            writeBookToFile(newBook);
         }
     }
 
@@ -148,27 +183,39 @@ public class BookManagementFrame extends JFrame {
         panel.add(authorField);
         panel.add(new JLabel("Price:"));
         panel.add(priceField);
-
+    
         int result = JOptionPane.showConfirmDialog(this, panel, "Edit Book", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            String title = titleField.getText();
-            String author = authorField.getText();
-
-            double price;
+            String newTitle = titleField.getText();
+            String newAuthor = authorField.getText();
+            double newPrice;
             try {
-                price = Double.parseDouble(priceField.getText());
+                newPrice = Double.parseDouble(priceField.getText());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Invalid price format. Please enter a valid price.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
+    
+            // Update the book object in the list
+            for (Book book : books) {
+                if (book.getTitle().equals(bookCard.getTitle()) && book.getAuthor().equals(bookCard.getAuthor()) && book.getPrice() == bookCard.getPrice()) {
+                    book.setTitle(newTitle);
+                    book.setAuthor(newAuthor);
+                    book.setPrice(newPrice);
+                    break;
+                }
+            }
+    
             // Update the book card with new details
-            bookCard.setTitle(title);
-            bookCard.setAuthor(author);
-            bookCard.setPrice(price);
+            bookCard.setTitle(newTitle);
+            bookCard.setAuthor(newAuthor);
+            bookCard.setPrice(newPrice);
+    
+            // Update the books.txt file
+            updateBooksFile();
         }
     }
-
+    
     private void writeBookToFile(Book book) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt", true))) {
             // Append book information to the file
@@ -179,4 +226,18 @@ public class BookManagementFrame extends JFrame {
         }
     }
 
+    private void updateBooksFile() {
+        // Clear the contents of the books.txt file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt"))) {
+            // Rewrite the book information to the file
+            for (Book book : books) {
+                writer.write(book.getTitle() + "," + book.getAuthor() + "," + book.getPrice());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+        
 }
