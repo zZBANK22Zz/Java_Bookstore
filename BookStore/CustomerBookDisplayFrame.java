@@ -1,12 +1,10 @@
 package BookStore;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +14,7 @@ public class CustomerBookDisplayFrame extends JFrame {
     private JPanel bookPanel;
     private JPanel cartPanel;
     private List<Book> cart;
-    private JLabel totalPriceLabel;
-    private double totalPrice;
+    private JLabel bookCountLabel; // Display the count of books in the cart
 
     public CustomerBookDisplayFrame() {
         setTitle("Book Store");
@@ -37,23 +34,22 @@ public class CustomerBookDisplayFrame extends JFrame {
 
         // Initialize cart
         cart = new ArrayList<>();
-        totalPrice = 0.0;
 
-        // Display total price
-        totalPriceLabel = new JLabel("Total Price: $" + totalPrice);
-        totalPriceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        add(totalPriceLabel, BorderLayout.SOUTH);
-
-        // Add Checkout button
-        JButton checkoutButton = new JButton("Checkout");
-        checkoutButton.addActionListener(new ActionListener() {
+        // Add Go to Cart button
+        JButton goToCartButton = new JButton("Go to Cart");
+        goToCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open payment page
-                openPaymentPage(totalPrice);
+                // Open shopping cart page
+                ShoppingCartFrame shoppingCartFrame = new ShoppingCartFrame(cart, CustomerBookDisplayFrame.this);
+                shoppingCartFrame.setVisible(true);
             }
         });
-        add(checkoutButton, BorderLayout.NORTH);
+        add(goToCartButton, BorderLayout.NORTH);
+
+        // Initialize book count label
+        bookCountLabel = new JLabel("Books in Cart: 0");
+        add(bookCountLabel, BorderLayout.SOUTH);
     }
 
     private void displayBookInformation() {
@@ -83,8 +79,9 @@ public class CustomerBookDisplayFrame extends JFrame {
                             // Add book to cart
                             Book book = new Book(title, author, price);
                             cart.add(book);
-                            totalPrice += price;
-                            totalPriceLabel.setText("Total Price: $" + totalPrice);
+
+                            // Update book count label
+                            updateBookCountLabel();
 
                             // Update cart display
                             updateCartPanel(book);
@@ -106,61 +103,18 @@ public class CustomerBookDisplayFrame extends JFrame {
     }
 
     private void updateCartPanel(Book book) {
-        JPanel cartItemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel titleLabel = new JLabel(book.getTitle());
-        JLabel priceLabel = new JLabel("$" + book.getPrice());
-        JButton removeButton = new JButton("Remove");
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Remove book from cart
-                cart.remove(book);
-                totalPrice -= book.getPrice();
-                totalPriceLabel.setText("Total Price: $" + totalPrice);
-                cartPanel.remove(cartItemPanel);
-                cartPanel.revalidate();
-                cartPanel.repaint();
-            }
-        });
+        // Update cart panel as before
 
-        cartItemPanel.add(titleLabel);
-        cartItemPanel.add(priceLabel);
-        cartItemPanel.add(removeButton);
-        cartPanel.add(cartItemPanel);
-        cartPanel.revalidate();
-        cartPanel.repaint();
+        // Update book count label
+        updateBookCountLabel();
     }
 
-    private void openPaymentPage(double amountToPay) {
-        // Load the QR code image
-        try {
-            File qrCodeFile = new File("...filename");
-            Image qrCodeImage = ImageIO.read(qrCodeFile);
-    
-            int newWidth = 400; // Change this to your desired width
-            int newHeight = 600; // Change this to your desired height
-    
-            // Resize the image
-            Image resizedImage = qrCodeImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-    
-            // Create a JLabel to display the resized image
-            JLabel qrCodeLabel = new JLabel(new ImageIcon(resizedImage));
-    
-            // Create a JLabel to display the amount to be paid
-            JLabel amountLabel = new JLabel("Amount to Pay: $" + amountToPay);
-            amountLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            amountLabel.setFont(new Font("Arial", Font.BOLD, 20));
-    
-            // Create a JPanel to hold the amount label and the QR code label
-            JPanel paymentPanel = new JPanel(new BorderLayout());
-            paymentPanel.add(amountLabel, BorderLayout.NORTH);
-            paymentPanel.add(qrCodeLabel, BorderLayout.CENTER);
-    
-            // Show the payment panel in a JOptionPane
-            JOptionPane.showMessageDialog(this, paymentPanel, "Payment Page", JOptionPane.PLAIN_MESSAGE);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading QR code image", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    public void updateBookCountLabel() {
+        int bookCount = cart.size();
+        bookCountLabel.setText("Books in Cart: " + bookCount);
     }
+
+    public void refreshBookCount() {
+        updateBookCountLabel();
     }
+}

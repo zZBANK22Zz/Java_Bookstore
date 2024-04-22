@@ -8,7 +8,7 @@ public class BookStoreApp {
             new LoginFrame().setVisible(true);
             //new CustomerLoginFrame().setVisible(true);
             //new BookManagementFrame().setVisible(true); // Set the frame visible
-            // new RegistrationFrame().setVisible(true);
+            //new RegistrationFrame().setVisible(true);
             //new CustomerBookDisplayFrame().setVisible(true);
         });
     }
