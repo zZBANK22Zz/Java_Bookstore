@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BookManagementFrame",
+            "request": "launch",
+            "mainClass": "BookStore.BookManagementFrame",
+            "projectName": "OOP_16f1069c"
+        },
+        {
+            "type": "java",
             "name": "ClassX",
             "request": "launch",
             "mainClass": "Exercise.ClassX",

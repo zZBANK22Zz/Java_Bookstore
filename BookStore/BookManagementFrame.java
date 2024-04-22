@@ -15,23 +15,37 @@ import java.util.List;
 public class BookManagementFrame extends JFrame {
     private JPanel bookPanel; // Panel to hold book cards
     private JButton addButton;
-    private List<Book> books; 
+    private List<Book> books;
+    private JTextField searchField; // Search text field
+    private JComboBox<String> menu; // Drop-down menu
 
     public BookManagementFrame() {
         setTitle("Book Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(800, 400);
 
         // Initialize components
         bookPanel = new JPanel(new GridLayout(0, 1)); // Use grid layout for book cards
         addButton = new JButton("Add Book");
+
+        String[] menuItems = {"Customer Login Page", "Customer Registration", "Customer Display Frame"}; // Menu items
+        menu = new JComboBox<>(menuItems); // Initialize drop-down menu
+        
+        searchField = new JTextField(20); // Initialize search text field
 
         books = new ArrayList<>();
 
         // Set layout
         setLayout(new BorderLayout());
 
+        // Panel for search and menu
+        JPanel searchMenuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        searchMenuPanel.add(menu);
+        searchMenuPanel.add(new JLabel("Search:"));
+        searchMenuPanel.add(searchField);
+
         // Add components to the content pane
+        add(searchMenuPanel, BorderLayout.NORTH);
         add(new JScrollPane(bookPanel), BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
@@ -48,9 +62,55 @@ public class BookManagementFrame extends JFrame {
                 showAddBookDialog();
             }
         });
-
         // Load existing books from file
         loadExistingBooks();
+        
+        // Add action listener for the search button
+        JButton searchButton = new JButton("Search");
+        searchMenuPanel.add(searchButton);
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchText = searchField.getText().toLowerCase(); // Convert search text to lowercase for case-insensitive search
+                boolean bookFound = false;
+
+                // Iterate through the list of books to find a match
+                for (Book book : books) {
+                    if (book.getTitle().toLowerCase().contains(searchText) ||
+                        book.getAuthor().toLowerCase().contains(searchText) ||
+                        String.valueOf(book.getPrice()).contains(searchText)) {
+                        bookFound = true;
+                        JOptionPane.showMessageDialog(BookManagementFrame.this, book.toString(), "Book Found", JOptionPane.INFORMATION_MESSAGE);
+                        break; // Stop searching once a match is found
+                    }
+                }
+
+                // If no book is found, display a message
+                if (!bookFound) {
+                    JOptionPane.showMessageDialog(BookManagementFrame.this, "No book found matching the search criteria.", "Book Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+                // Add action listener for the dropdown menu
+                menu.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String selectedOption = (String) menu.getSelectedItem();
+                        // Perform action based on selected option
+                        switch (selectedOption) {
+                            case "Customer Login Page":
+                                // Open customer login page
+                                openCustomerLoginPage();
+                                break;
+                            case "Customer Display Frame":
+                                // Open customer display frame
+                                openCustomerDisplayFrame();
+                                break;
+                        }
+                    }
+                });
     }
 
     private void loadExistingBooks() {
@@ -239,5 +299,24 @@ public class BookManagementFrame extends JFrame {
         }
     }
     
-        
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new BookManagementFrame().setVisible(true);
+            }
+        });
+    }
+
+        // Method to open customer login page
+        private void openCustomerLoginPage() {
+            // Your code to open the customer login page goes here
+            new CustomerLoginFrame().setVisible(true);
+        }
+
+    
+        // Method to open customer display frame
+        private void openCustomerDisplayFrame() {
+            // Your code to open the customer display frame goes here
+            new CustomerBookDisplayFrame().setVisible(true);
+        }
 }

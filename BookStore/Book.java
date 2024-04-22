@@ -6,12 +6,18 @@ public class Book implements Serializable{
     private String title;
     private String author;
     private double price;
+    
+    @Override
+    public String toString() {
+        return "Title: " + title + "\nAuthor: " + author + "\nPrice: $" + price;
+    }
 
     public Book(String title, String author, double price) {
         this.title = title;
         this.author = author;
         this.price = price;
     }
+    
 
     // Getters and setters for title, author, and price
     public String getTitle() {
