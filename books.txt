@@ -3,3 +3,4 @@ Book2,admin2,20.0
 Thai,bank,199.0
 Eng,admin3,400.0
 Noko,bank,120.0
+Binary,eiei,129.0

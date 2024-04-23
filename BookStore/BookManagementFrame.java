@@ -28,7 +28,7 @@ public class BookManagementFrame extends JFrame {
         bookPanel = new JPanel(new GridLayout(0, 1)); // Use grid layout for book cards
         addButton = new JButton("Add Book");
 
-        String[] menuItems = {"Customer Login Page", "Customer Registration", "Customer Display Frame"}; // Menu items
+        String[] menuItems = {"Login Page", "Customer Login", "Customer Display Frame"}; // Menu items
         menu = new JComboBox<>(menuItems); // Initialize drop-down menu
         
         searchField = new JTextField(20); // Initialize search text field
@@ -100,6 +100,9 @@ public class BookManagementFrame extends JFrame {
                         String selectedOption = (String) menu.getSelectedItem();
                         // Perform action based on selected option
                         switch (selectedOption) {
+                            case "Login Page":
+                                bankToLogin();
+                                break;
                             case "Customer Login Page":
                                 // Open customer login page
                                 openCustomerLoginPage();
@@ -112,9 +115,27 @@ public class BookManagementFrame extends JFrame {
                     }
                 });
     }
+            // Method to open customer login page
+            private void bankToLogin() {
+                // Your code to open the customer login page goes here
+                new LoginFrame().setVisible(true);
+            }
+    
+            // Method to open customer login page
+            private void openCustomerLoginPage() {
+                // Your code to open the customer login page goes here
+                new CustomerLoginFrame().setVisible(true);
+            }
+    
+        
+            // Method to open customer display frame
+            private void openCustomerDisplayFrame() {
+                // Your code to open the customer display frame goes here
+                new CustomerBookDisplayFrame().setVisible(true);
+            }
 
     private void loadExistingBooks() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("books.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data.dat"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 // Split the line by comma to extract book details
@@ -277,7 +298,7 @@ public class BookManagementFrame extends JFrame {
     }
     
     private void writeBookToFile(Book book) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data.dat", true))) {
             // Append book information to the file
             writer.write(book.getTitle() + "," + book.getAuthor() + "," + book.getPrice());
             writer.newLine(); // Add a new line for the next book
@@ -288,7 +309,7 @@ public class BookManagementFrame extends JFrame {
 
     private void updateBooksFile() {
         // Clear the contents of the books.txt file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("books.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data.dat"))) {
             // Rewrite the book information to the file
             for (Book book : books) {
                 writer.write(book.getTitle() + "," + book.getAuthor() + "," + book.getPrice());
@@ -306,17 +327,4 @@ public class BookManagementFrame extends JFrame {
             }
         });
     }
-
-        // Method to open customer login page
-        private void openCustomerLoginPage() {
-            // Your code to open the customer login page goes here
-            new CustomerLoginFrame().setVisible(true);
-        }
-
-    
-        // Method to open customer display frame
-        private void openCustomerDisplayFrame() {
-            // Your code to open the customer display frame goes here
-            new CustomerBookDisplayFrame().setVisible(true);
-        }
 }

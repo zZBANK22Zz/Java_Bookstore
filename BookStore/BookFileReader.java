@@ -1,8 +1,8 @@
 package BookStore;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,17 +10,14 @@ public class BookFileReader {
 
     public static List<Book> readBooksFromFile(String filename) {
         List<Book> books = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                String title = parts[0];
-                String author = parts[1];
-                double price = Double.parseDouble(parts[2]);
-                books.add(new Book(title, author, price));
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            while (true) {
+                Book book = (Book) ois.readObject();
+                books.add(book);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            // End of file reached or error reading object
+            // No action required
         }
         return books;
     }
